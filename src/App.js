@@ -1,10 +1,15 @@
+import { ethers } from "ethers";
 import React, {useEffect, useState} from "react";
 import './App.css';
+import {contractAddress} from './utils/constants';
+import abi from "./utils/Messenger.json";
 
 
 const App = () => {
 
   const [currentAccount, setCurrentAccount] = useState("");
+  
+  const contractABI = abi.abi;
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -55,6 +60,33 @@ const App = () => {
     }
   }
 
+  const wave = async() => {
+    try{
+      const{ethereum} = window;
+
+      if (ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const messengerPortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        let count = await messengerPortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+
+        //Call the Contract counter
+        const messageTxn = await messengerPortalContract.wave();
+        console.log('Transaction is mining...');
+        await messageTxn.wait();
+        console.log('Transaction mined - message sent.' , messageTxn.hash);
+        count = await messengerPortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+
+      }else{
+        console.log("Ethereum object does not exist!");
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
   
     /*
     * This runs our function when the page loads.
@@ -69,24 +101,24 @@ const App = () => {
       <div className="dataContainer">
         
         <div className="header">
-         . 👋 Hey there!
+          👋 Hey there!
         </div>
 
         <div className="bio">
         Hey, I am Rony. Your preferred blockchain dev. Connect your Ethereum wallet and wave at me!
         </div>
 
-        <button className="waveButton" onClick={null}>
+        <button disabled={!currentAccount} className="waveButton" onClick={wave}>
           Wave at Me
         </button>
         {/*
         * If not cnnected render this Btn
         */}
-        {!currentAccount && (
-          <button className="waveButton" onClick={connectWallet}>
-            Connect Wallet
-          </button>
-        )}
+        
+        <button className="waveButton" onClick={connectWallet}>
+          { currentAccount? `Connected as ${currentAccount}`:`Connect Wallet`}
+        </button>
+        
       </div>
     </div>
   );
