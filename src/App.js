@@ -161,7 +161,6 @@ const App = () => {
           <video align="center" width="450" height="390" autoPlay muted loop>
             <source src="https://cdn-animation.artstation.com/p/video_sources/000/560/972/ubeejwn9ywd-576.mp4" type="video/mp4"/>
           </video>
-
         </div>
       </div>
     
