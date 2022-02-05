@@ -1,4 +1,5 @@
 .mainContainer {
+
   display: flex;
   justify-content: center;
   width: 100%;
@@ -21,14 +22,24 @@
 .bio {
   text-align: center;
   color: gray;
-  margin-top: 16px;
+  margin-top: 20px;
+  height: 5vh;
 }
 
 .waveButton {
   cursor: pointer;
+  align-self: center;
   margin-top: 16px;
   padding: 8px;
   border: 0;
+  width: 40vh;
   border-radius: 5px;
   
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 18vh;
 }

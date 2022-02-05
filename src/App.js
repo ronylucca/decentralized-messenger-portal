@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import React, {useEffect, useState} from "react";
+import AnimatedNumbers from "react-animated-numbers";
 import './App.css';
 import {contractAddress} from './utils/constants';
 import abi from "./utils/Messenger.json";
@@ -8,6 +9,7 @@ import abi from "./utils/Messenger.json";
 const App = () => {
 
   const [currentAccount, setCurrentAccount] = useState("");
+  const [num, setNum] = useState(9);
   
   const contractABI = abi.abi;
 
@@ -31,6 +33,14 @@ const App = () => {
         const account = accounts[0];
         console.log("Found an authorized account:", account);
         setCurrentAccount(account)
+        if(ethereum){
+
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const messengerPortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+          setNum(await messengerPortalContract.getTotalWaves());
+        }
+
       } else {
         console.log("No authorized account found")
       }
@@ -52,7 +62,6 @@ const App = () => {
       }
 
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0]);
     } catch (error) {
@@ -79,6 +88,7 @@ const App = () => {
         console.log('Transaction mined - message sent.' , messageTxn.hash);
         count = await messengerPortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
+        setNum(count);
 
       }else{
         console.log("Ethereum object does not exist!");
@@ -119,8 +129,44 @@ const App = () => {
           { currentAccount? `Connected as ${currentAccount}`:`Connect Wallet`}
         </button>
         
+      
+
+      {/* <AnimatedNumbers
+      includeComma
+      animateToNumber={num}
+      fontStyle={{ fontSize: 40 }}
+      configs={[
+        { mass: 1, tension: 220, friction: 100 },
+        { mass: 1, tension: 180, friction: 130 },
+        { mass: 1, tension: 280, friction: 90 },
+        { mass: 1, tension: 180, friction: 135 },
+        { mass: 1, tension: 260, friction: 100 },
+        { mass: 1, tension: 210, friction: 180 },
+      ]}
+    ></AnimatedNumbers> */}
+
+        <div className="container">
+          <AnimatedNumbers
+            animateToNumber={num}
+            fontStyle={{ fontSize: 40 }}
+            configs={(number, index) => {
+              return { mass: 1, tension: 230 * (index + 1), friction: 140 };
+            }}
+            ></AnimatedNumbers>  
+        <div className="bio">&nbsp;👋&nbsp; have been sent so far! 
+          </div>
+        </div>
+        <div align="center">
+
+          <video align="center" width="450" height="390" autoPlay muted loop>
+            <source src="https://cdn-animation.artstation.com/p/video_sources/000/560/972/ubeejwn9ywd-576.mp4" type="video/mp4"/>
+          </video>
+
+        </div>
       </div>
+    
     </div>
+
   );
 };
 export default App;
