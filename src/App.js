@@ -11,7 +11,6 @@ const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [allWaves, setAllWaves] = useState([]);
   const [num, setNum] = useState(0);
-  const [waveMessage, setWaveMessage] = useState('')
   
   const contractABI = abi.abi;
 
@@ -156,7 +155,7 @@ const App = () => {
         Hey, I am Rony. Your preferred blockchain dev. Connect your Ethereum wallet and wave at me!
         </div>
 
-        <input id="messageWave"/>
+        <input id="messageWave" defaultValue="Type something here..."/>
         <button disabled={!currentAccount} className="waveButton" onClick={wave}>
           Wave at Me
         </button>
