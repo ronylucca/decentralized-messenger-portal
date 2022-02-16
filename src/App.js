@@ -159,7 +159,7 @@ const App = () => {
         <div className="header">👋 Hey there!</div>
 
         <div className="bio">
-          Hey, I am Rony. Your preferred blockchain dev. Connect your Ethereum
+          Hey, I am Rony. Your preferred blockchain dev. Connect your Ethereum(Rinkeby)
           wallet and wave at me!
         </div>
 
