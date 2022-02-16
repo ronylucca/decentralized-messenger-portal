@@ -163,7 +163,7 @@ const App = () => {
           wallet and wave at me!
         </div>
 
-        <input id="messageWave" defaultValue="Type something here..." />
+        <input className='waveButton' id="messageWave" defaultValue="Type something here..." />
         <button
           disabled={!currentAccount}
           className="waveButton"
