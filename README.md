@@ -1,6 +1,6 @@
 
 <p>
-<img alt="React" src="https://img.shields.io/badge/-.Net-6D429C?style=for-the-badge&logo=dotnet&logoColor=white" />
+<img alt="React.js" src="https://img.shields.io/badge/-React.js-black?style=for-the-badge&logo=react&logoColor=white" />
 <img alt="Web3.js" src="https://img.shields.io/badge/-Web3.js-F16822?style=for-the-badge&logo=web3.js&logoColor=white" />
 <img alt="HardHat" src="https://img.shields.io/badge/-Hardhat-7C86C7?style=for-the-badge&logo=hardhat&logoColor=white" />
 <img alt="Solidity" src="https://img.shields.io/badge/-Solidity-BAC9F9?style=for-the-badge&logo=solidity&logoColor=363636" />
